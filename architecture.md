@@ -1,4 +1,4 @@
-
+# Architecture
 ```mermaid
 %%{init: {"flowchart": {"htmlLabels": false}} }%%
 graph TD;        
@@ -20,4 +20,14 @@ graph TD;
     updateWordQueue>"update-word-queue"] ==> updateWord
     updateWord[["update-word<br /><small>Updates words in the database with new data</small>"]]
     updateWord ..-> wordsTable[("words-table")]
+```
+
+## Legend
+```mermaid
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+graph LR;
+    database[("database-table")]
+        <-."read/write".->    
+    lambda[["lambda"]] =="message"==> queue>"queue"]    
+    trigger@{ shape: "circle" } --> lambda
 ```
