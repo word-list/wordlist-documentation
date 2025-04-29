@@ -6,7 +6,7 @@
 Messages for the `update-from-source` lambda which trigger an update from a word source.
 
 ### Message Format
-```json
+```jsonc
 {
     "name": "name-of-source",
     "force": false // true to update all words even if they already exist
@@ -19,7 +19,7 @@ Messages for the `update-from-source` lambda which trigger an update from a word
 Messages for the `query-word` lambda which triggers a (batched) async LLM query for one or more words.
 
 ### Message Format
-```json
+```jsonc
 {
     "word": "word-to-query",
     "force": false // true to update the word even if it exists
@@ -35,7 +35,7 @@ Messages for the `update-batch` lambda which retrieves the status of a batched L
 - If the batch failed, the failure is recorded.
 
 ### Message Format
-```json
+```jsonc
 {
     "batchId": "batchId-to-update"
 }
@@ -47,7 +47,7 @@ Messages for the `update-batch` lambda which retrieves the status of a batched L
 Messages for the `update-word` lambda which updates stored words.
 
 ### Message Format
-```json
+```jsonc
 {
     "word": "word-to-update",
     "offensiveness": 0, // 0 to 5 where 5 is extremely offensive
