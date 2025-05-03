@@ -14,15 +14,16 @@ graph TD;
     end
     queryWord -..-> chatGPT(LLM Batch API)
     queryWord -..-> activeQueriesTable[("active-queries-table")]
+    queryWord -..-> activeBatchesTable
     updateBatchStatus ==> queryWordQueue
     subgraph Batch status update
     timeTrigger@{ shape: circle, label: "Timer" } --> updateBatches
     updateBatches[["update-batches<br/><small>Retrieves batches that need to be checked and queues them for checking.</small>"]]
     updateBatches ==> updateBatchStatusQueue
     updateBatchStatusQueue>"update-batch-status-queue"] ==> updateBatchStatus
-    activeQueriesTable ..-> updateBatches
+    activeBatchesTable[("active-batches-table")] ..-> updateBatches    
+    activeBatchesTable <-..-> updateBatchStatus
     activeQueriesTable <-..-> updateBatchStatus[["update-batch-status<br/><small>Updates one batch request, posting words for update if completed</small>"]]
-    updateBatchStatus ..-> completedQueriesTable[("completed-queries-table")]
     end
     subgraph Update words
     updateBatchStatus ==> updateWordQueue
