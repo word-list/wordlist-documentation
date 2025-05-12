@@ -7,8 +7,9 @@ graph TD;
         apiUpdateSource[["api-update-source<br /><small>PUT /api/sources/{id}</small>"]] -..-> sourcesTable
         apiDeleteSource[["api-delete-source<br /><small>DELETE /api/sources</small>"]] -..-> sourcesTable
         apiCreateSource[["api-create-source<br /><small>POST /api/sources</small>"]] -..-> sourcesTable
-        apiUpdateFromSource[["api-update-from-source<br /><small>POST /api/sources/{id}/actions/update</small>"]] ==> updateFromSourceQueue
+        apiUpdateFromSource[["api-update-from-source<br /><small>POST /api/sources/{id}/actions/update</small>"]] ==> updateFromSourceQueue        
         sourcesTable[("sources-table")] -..-> updateFromSource[["update-from-source<br/><small>Retrieves words from a single source and queues them for update individually</small>"]]
+        sourcesTable -..-> apiUpdateFromSource
         updateFromSourceQueue>"update-from-source-queue"] ==> updateFromSource
     end
     subgraph Query LLM
